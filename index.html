@@ -1,0 +1,128 @@
+<html>
+  <head>
+      <title>Shuffle and Sort</title> 
+      <meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+      <link rel="stylesheet" href="style.css" />
+      <script src="jqueryv.3.5.1.js"></script>
+     
+      <script>
+        $( document ).ready(function() {
+
+          var grid = $('#grid');
+          var browserWidth = $(window).width();
+
+          for (var i = 1; i <= 9; i++) {
+            grid.append('<div class="card card-'+ i + '">' + i + '</div>');
+          }
+      
+          $(".btn_shuffle").click(function() {
+            var cardNumbers = [];
+            
+            $('.card').each(function() {
+              cardNumbers.push(this.innerHTML);
+            });
+
+            var theLength = cardNumbers.length - 1;
+            var toSwap;
+            var temp;
+            
+            for (var i = theLength; i > 0; i--) {
+              toSwap = Math.floor(Math.random() * (i + 1));
+              temp = cardNumbers[i];
+              cardNumbers[i] = cardNumbers[toSwap];
+              console.log(cardNumbers[i]);
+              cardNumbers[toSwap] = temp;
+            }
+            
+            i = 0;
+            
+            $('.card').each(function() {
+              this.innerHTML = cardNumbers[i];
+              i++;
+            });
+
+        
+            grid.each(function(value, index) {
+                  
+                 $('.card-1').animate({"left": "160", "top": "160"}, 1000);
+                 $('.card-2').animate({"left": "320", "top": "320"}, 1000);
+                 $('.card-3').animate({"left": "320", "top": "160"}, 1000);
+                 $('.card-4').animate({"left": "0", "top": "0"}, 1000);
+                 $('.card-5').animate({"left": "160", "top": "0"}, 1000);
+                 $('.card-6').animate({"left": "0", "top": "160"}, 1000);
+                 $('.card-7').animate({"left": "160", "top": "320"}, 1000);
+                 $('.card-8').animate({"left": "0", "top": "320"}, 1000);
+                 $('.card-9').animate({"left": "320", "top": "0"}, 1000);
+            });
+
+            if (browserWidth < 750){
+                 $('.card-1').slideUp();
+                 $('.card-2').slideDown();
+                 $('.card-3').slideDown();
+                 $('.card-4').slideUp();
+                 $('.card-5').slideDown();
+                 $('.card-6').slideUp();
+                 $('.card-7').slideUp();
+                 $('.card-8').slideDown();
+                 $('.card-9').slideDown();
+                }
+    //Load Wide CSS Rules
+    /*if ((browserWidth >= 750) && (browserWidth <= 950)){
+        changeLayout("wide");
+    }*/
+           
+          });
+
+          $(".btn_sort").click(function() {
+            var cardNumbers = [];
+            
+            $('.card').each(function() {
+              cardNumbers.push(+this.innerHTML);
+            });
+            
+            cardNumbers.sort();
+            
+            i = 0;
+            
+            $('.card').each(function() {
+              this.innerHTML = cardNumbers[i];
+              i++;
+            });
+
+            $('.card-1').animate({"left":"0" , "top" : "0"}, 1000);
+            $('.card-2').animate({"left":"160" , "top" : "0"}, 1000);
+            $('.card-3').animate({"left":"320" , "top" : "0"}, 1000);
+            $('.card-4').animate({"left":"0" , "top" : "160"}, 1000);
+            $('.card-5').animate({"left":"160" , "top" : "160"}, 1000);
+            $('.card-6').animate({"left":"320" , "top" : "160"}, 1000);
+            $('.card-7').animate({"left":"0" , "top" : "320"}, 1000);
+            $('.card-8').animate({"left":"160" , "top" : "320"}, 1000);
+            $('.card-9').animate({"left":"320" , "top" : "320"}, 1000);
+
+            if (browserWidth < 750){
+                $('.card-1').slideToggle();
+                 $('.card-2').slideToggle();
+                 $('.card-3').slideToggle();
+                 $('.card-4').slideToggle();
+                 $('.card-5').slideToggle();
+                 $('.card-6').slideToggle();
+                 $('.card-7').slideToggle();
+                 $('.card-8').slideToggle();
+                 $('.card-9').slideToggle(); 
+                }
+           
+          });
+
+      });
+      </script>
+      
+      
+  </head>
+  <body>
+    <button class="btn_shuffle" id="shuffle">Shuffle</button>
+    <button class="btn_sort">Sort</button>
+    <div class="wrapper">
+       <div id="grid"></div>
+    </div>
+  </body>
+</html>
